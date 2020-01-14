@@ -3,8 +3,10 @@ const { promisify } = require("util");
 const writeFile = promisify(require("fs").writeFile);
 const glob = require("fast-glob");
 
+const CONFIG_FILES = [".sitemaprc", ".sitemap.js", "sitemap.config.js"];
+
 const getConfig = async (bundle, packageKey) =>
-    await bundle.entryAsset.getConfig([], { packageKey });
+    await bundle.entryAsset.getConfig(CONFIG_FILES, { packageKey });
 
 module.exports = bundler => {
     bundler.on("bundled", async bundle => {
